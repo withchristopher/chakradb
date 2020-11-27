@@ -13,7 +13,7 @@ router.get('/api/toothless', (req, res) => {
   });
 });
 
-// POST route for saving a new tooth
+// POST route for saving a new toothless
 router.post('/api/toothless', (req, res) => {
   Toothless.create({
     text: req.body.text,
