@@ -1,42 +1,42 @@
 // Dependencies
 // =============================================================
 const router = require('express').Router();
-const Todo = require('../models/todo');
+const Toothless = require('../models/toothless');
 
 // Routes
 // =============================================================
 
-// GET route for getting all of the todos
-router.get('/api/todos', (req, res) => {
-  Todo.findAll({}).then(dbTodo => {
-    res.json(dbTodo);
+// GET route for getting all of the toothless
+router.get('/api/toothless', (req, res) => {
+  Toothless.findAll({}).then(dbToothless => {
+    res.json(dbToothless);
   });
 });
 
-// POST route for saving a new todo
-router.post('/api/todos', (req, res) => {
-  Todo.create({
+// POST route for saving a new tooth
+router.post('/api/toothless', (req, res) => {
+  Toothless.create({
     text: req.body.text,
     complete: req.body.complete
-  }).then(dbTodo => {
-    res.json(dbTodo);
+  }).then(dbToothless => {
+    res.json(dbToothless);
   });
 });
 
-// DELETE route for deleting a todo
-router.delete('/api/todos/:id', (req, res) => {
-  Todo.destroy({
+// DELETE route for deleting a tooth
+router.delete('/api/toothless/:id', (req, res) => {
+  Toothless.destroy({
     where: {
       id: req.params.id
     }
-  }).then(dbTodo => {
-    res.json(dbTodo);
+  }).then(dbToothless => {
+    res.json(dbToothless);
   });
 });
 
-// PUT route for updating a todo
-router.put('/api/todos/:id', (req, res) => {
-  Todo.update(
+// PUT route for updating a tooth
+router.put('/api/toothless/:id', (req, res) => {
+  Toothless.update(
     {
       text: req.body.text,
       complete: req.body.complete
@@ -46,8 +46,8 @@ router.put('/api/todos/:id', (req, res) => {
         id: req.params.id
       }
     }
-  ).then(dbTodo => {
-    res.json(dbTodo);
+  ).then(dbToothless => {
+    res.json(dbToothless);
   });
 });
 

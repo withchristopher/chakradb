@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Todo extends Model {}
+class Toothless extends Model {}
 
-Todo.init(
+Toothless.init(
   {
     text: DataTypes.STRING,
     complete: DataTypes.BOOLEAN
@@ -13,4 +13,4 @@ Todo.init(
   }
 );
 
-module.exports = Todo;
+module.exports = Toothless;

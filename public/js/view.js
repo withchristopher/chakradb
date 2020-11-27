@@ -1,59 +1,59 @@
 $(document).ready(function() {
-  // Getting a reference to the input field where user adds a new todo
+  // Getting a reference to the input field where user adds a new tooth
   var $newItemInput = $('input.new-item');
-  // Our new todos will go inside the todoContainer
-  var $todoContainer = $('.todo-container');
-  // Adding event listeners for deleting, editing, and adding todos
-  $(document).on('click', 'button.delete', deleteTodo);
+  // Our new toothless will go inside the toothContainer
+  var $toothContainer = $('.tooth-container');
+  // Adding event listeners for deleting, editing, and adding toothless
+  $(document).on('click', 'button.delete', deleteTooth);
   $(document).on('click', 'button.complete', toggleComplete);
-  $(document).on('click', '.todo-item', editTodo);
-  $(document).on('keyup', '.todo-item', finishEdit);
-  $(document).on('blur', '.todo-item', cancelEdit);
-  $(document).on('submit', '#todo-form', insertTodo);
+  $(document).on('click', '.tooth-item', editTooth);
+  $(document).on('keyup', '.tooth-item', finishEdit);
+  $(document).on('blur', '.tooth-item', cancelEdit);
+  $(document).on('submit', '#tooth-form', insertTooth);
 
-  // Our initial todos array
-  var todos = [];
+  // Our initial toothless array
+  var toothless = [];
 
-  // Getting todos from database when page loads
-  getTodos();
+  // Getting toothless from database when page loads
+  getToothless();
 
-  // This function resets the todos displayed with new todos from the database
+  // This function resets the toothless displayed with new toothless from the database
   function initializeRows() {
-    $todoContainer.empty();
+    $toothContainer.empty();
     var rowsToAdd = [];
-    for (var i = 0; i < todos.length; i++) {
-      rowsToAdd.push(createNewRow(todos[i]));
+    for (var i = 0; i < toothless.length; i++) {
+      rowsToAdd.push(createNewRow(toothless[i]));
     }
-    $todoContainer.prepend(rowsToAdd);
+    $toothContainer.prepend(rowsToAdd);
   }
 
-  // This function grabs todos from the database and updates the view
-  function getTodos() {
-    $.get('/api/todos', function(data) {
-      todos = data;
+  // This function grabs toothless from the database and updates the view
+  function getToothless() {
+    $.get('/api/toothless', function(data) {
+      toothless = data;
       initializeRows();
     });
   }
 
-  // This function deletes a todo when the user clicks the delete button
-  function deleteTodo(event) {
+  // This function deletes a tooth when the user clicks the delete button
+  function deleteTooth(event) {
     event.stopPropagation();
     var id = $(this).data('id');
     $.ajax({
       method: 'DELETE',
-      url: '/api/todos/' + id
-    }).then(getTodos);
+      url: '/api/toothless/' + id
+    }).then(getToothless);
   }
 
-  // This function handles showing the input box for a user to edit a todo
-  function editTodo() {
-    var currentTodo = $(this).data('todo');
+  // This function handles showing the input box for a user to edit a tooth
+  function editTooth() {
+    var currentTooth = $(this).data('tooth');
     $(this)
       .children()
       .hide();
     $(this)
       .children('input.edit')
-      .val(currentTodo.text);
+      .val(currentTooth.text);
     $(this)
       .children('input.edit')
       .show();
@@ -65,47 +65,47 @@ $(document).ready(function() {
   // Toggles complete status
   function toggleComplete(event) {
     event.stopPropagation();
-    var todo = $(this)
+    var tooth = $(this)
       .parent()
-      .data('todo');
-    todo.complete = !todo.complete;
-    updateTodo(todo);
+      .data('tooth');
+    tooth.complete = !tooth.complete;
+    updateTooth(tooth);
   }
 
-  // This function starts updating a todo in the database if a user hits the "Enter Key"
+  // This function starts updating a tooth in the database if a user hits the "Enter Key"
   // While in edit mode
   function finishEdit(event) {
-    var updatedTodo = $(this).data('todo');
+    var updatedTooth = $(this).data('tooth');
     if (event.which === 13) {
-      updatedTodo.text = $(this)
+      updatedTooth.text = $(this)
         .children('input')
         .val()
         .trim();
       $(this).blur();
-      updateTodo(updatedTodo);
+      updateTooth(updatedTooth);
     }
   }
 
-  // This function updates a todo in our database
-  function updateTodo(todo) {
+  // This function updates a tooth in our database
+  function updateTooth(tooth) {
     $.ajax({
       method: 'PUT',
-      url: '/api/todos/' + todo.id,
-      data: todo
-    }).then(getTodos);
+      url: '/api/toothless/' + tooth.id,
+      data: tooth
+    }).then(getToothless);
   }
 
-  // This function is called whenever a todo item is in edit mode and loses focus
+  // This function is called whenever a tooth item is in edit mode and loses focus
   // This cancels any edits being made
   function cancelEdit() {
-    var currentTodo = $(this).data('todo');
-    if (currentTodo) {
+    var currentTooth = $(this).data('tooth');
+    if (currentTooth) {
       $(this)
         .children()
         .hide();
       $(this)
         .children('input.edit')
-        .val(currentTodo.text);
+        .val(currentTooth.text);
       $(this)
         .children('span')
         .show();
@@ -115,13 +115,13 @@ $(document).ready(function() {
     }
   }
 
-  // This function constructs a todo-item row
-  function createNewRow(todo) {
+  // This function constructs a tooth-item row
+  function createNewRow(tooth) {
     var $newInputRow = $(
       [
-        "<li class='list-group-item todo-item'>",
+        "<li class='list-group-item tooth-item'>",
         '<span>',
-        todo.text,
+        tooth.text,
         '</span>',
         "<input type='text' class='edit' style='display: none;'>",
         "<button class='delete btn btn-danger'>x</button>",
@@ -130,24 +130,24 @@ $(document).ready(function() {
       ].join('')
     );
 
-    $newInputRow.find('button.delete').data('id', todo.id);
+    $newInputRow.find('button.delete').data('id', tooth.id);
     $newInputRow.find('input.edit').css('display', 'none');
-    $newInputRow.data('todo', todo);
-    if (todo.complete) {
+    $newInputRow.data('tooth', tooth);
+    if (tooth.complete) {
       $newInputRow.find('span').css('text-decoration', 'line-through');
     }
     return $newInputRow;
   }
 
-  // This function inserts a new todo into our database and then updates the view
-  function insertTodo(event) {
+  // This function inserts a new tooth into our database and then updates the view
+  function insertTooth(event) {
     event.preventDefault();
-    var todo = {
+    var tooth = {
       text: $newItemInput.val().trim(),
       complete: false
     };
 
-    $.post('/api/todos', todo, getTodos);
+    $.post('/api/toothless', tooth, getToothless);
     $newItemInput.val('');
   }
 });
