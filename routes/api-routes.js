@@ -81,7 +81,7 @@ router.post('/api/keywords', (req, res) => {
   // create a new keyword
   Keywords
     .create({
-      keyword_name: req.body.keyword_name
+      keywords_name: req.body.keywords_name
     })
     .then(dbKeywordsData => res.json(dbKeywordsData))
     .catch(err => {
