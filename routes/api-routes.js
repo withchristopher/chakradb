@@ -1,7 +1,7 @@
 // Dependencies
 // =============================================================
 const router = require('express').Router();
-const {Toothless, Keywords} = require('../models');
+const { Toothless, Keywords } = require('../models/index');
 
 // Routes
 // =============================================================
