@@ -15,7 +15,7 @@ router.get('/api/toothless', (req, res) => {
 
 // GET route for deleting a tooth
 router.get('/api/toothless/:id', (req, res) => {
-  Toothless.findById({
+  Toothless.findAll({
     where: {
       id: req.params.id
     }
