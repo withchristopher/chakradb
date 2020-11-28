@@ -19,7 +19,7 @@ app.use(express.json());
 // Static directory
 app.use(express.static('public'));
 
-// Routes
+// Routes test
 // =============================================================
 app.use(routes);
 
