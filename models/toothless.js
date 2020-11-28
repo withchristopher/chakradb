@@ -6,10 +6,15 @@ class Toothless extends Model {}
 Toothless.init(
   {
     text: DataTypes.STRING,
-    complete: DataTypes.BOOLEAN
+    complete: DataTypes.BOOLEAN,
+    allowNull: false
   },
   {
-    sequelize
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'toothless'
   }
 );
 

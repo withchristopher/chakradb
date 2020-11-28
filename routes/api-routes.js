@@ -1,6 +1,7 @@
 // Dependencies
 // =============================================================
 const router = require('express').Router();
+const Keywords = require('../models/keywords');
 const Toothless = require('../models/toothless');
 
 // Routes
@@ -60,6 +61,75 @@ router.put('/api/toothless/:id', (req, res) => {
   ).then(dbToothless => {
     res.json(dbToothless);
   });
+});
+
+
+//// Keywords
+
+router.get('/api/keywords', (req, res) => {
+  Keywords.findAll({}).then(dbKeywords => {
+    res.json(dbKeywords)
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
+  });
+});
+
+
+router.post('/api/keywords', (req, res) => {
+  // create a new keyword
+  Keywords
+    .create({
+      keyword_name: req.body.keyword_name
+    })
+    .then(dbKeywordsData => res.json(dbKeywordsData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
+});
+
+router.put('/api/keywords/:id', (req, res) => {
+  // update a keyword by its `id` value
+  Keywords
+    .update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(dbKeywordsData => {
+      if (!dbKeywordsData[0]) {
+        res.status(404).json({ message: 'No keyword found with this id' });
+        return;
+      }
+      res.json(dbKeywordsData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+router.delete('/api/keywords/:id', (req, res) => {
+  // delete a keyword by its `id` value
+  Keywords
+    .destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    .then(dbKeywordsData => {
+      if (!dbKeywordsData) {
+        res.status(404).json({ message: 'No keyword found with this id' });
+        return;
+      }
+      res.json(dbKeywordsData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
