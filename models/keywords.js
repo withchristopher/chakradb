@@ -14,6 +14,13 @@ Keywords.init(
     keywords_name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    toothless_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'toothless',
+          key: 'id'
+        }
     }
   },
   {

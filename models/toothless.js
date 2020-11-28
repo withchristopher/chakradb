@@ -15,13 +15,6 @@ Toothless.init(
       type: DataTypes.STRING,
       allowNull: false
     },
-    keywords_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'keywords',
-        key: 'id'
-      }
-    }
   },
   {
     sequelize,
