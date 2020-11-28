@@ -35,7 +35,6 @@ router.get('/api/toothless/:id', (req, res) => {
 router.post('/api/toothless', (req, res) => {
   Toothless.create({
     text: req.body.text,
-    complete: req.body.complete
   }).then(dbToothless => {
     res.json(dbToothless);
   });

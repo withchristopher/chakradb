@@ -14,10 +14,7 @@ Toothless.init(
     text: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    complete: {
-      type: DataTypes.BOOLEAN
-        }
+    }
   },
   {
     sequelize,
