@@ -13,6 +13,17 @@ router.get('/api/toothless', (req, res) => {
   });
 });
 
+// GET route for deleting a tooth
+router.get('/api/toothless/:id', (req, res) => {
+  Toothless.findById({
+    where: {
+      id: req.params.id
+    }
+  }).then(dbToothless => {
+    res.json(dbToothless);
+  });
+});
+
 // POST route for saving a new toothless
 router.post('/api/toothless', (req, res) => {
   Toothless.create({
