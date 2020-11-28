@@ -28,7 +28,7 @@ Keywords.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'keywords',
+    modelName: 'keyword',
   }
 );
 
