@@ -12,4 +12,4 @@ Toothless.hasMany(Keywords, {
     foreignKey: 'toothless_id'
   })
 
-module.exports = { Keywords, Toothless};
+module.exports = { Keywords, Toothless };
