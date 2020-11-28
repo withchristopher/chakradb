@@ -5,9 +5,23 @@ class Toothless extends Model {}
 
 Toothless.init(
   {
-    text: DataTypes.STRING,
-    complete: DataTypes.BOOLEAN,
-    allowNull: false
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    text: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    keywords_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'keywords',
+        key: 'id'
+      }
+    }
   },
   {
     sequelize,

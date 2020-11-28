@@ -11,7 +11,7 @@ Keywords.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    category_name: {
+    keywords_name: {
       type: DataTypes.STRING,
       allowNull: false
     }
