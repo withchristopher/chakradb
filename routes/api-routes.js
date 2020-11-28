@@ -76,11 +76,7 @@ router.get('/api/keywords', (req, res) => {
   Keywords.findAll({
     include: [
       {
-        model: Category
-      },
-      {
-        model: Tag,
-        as: 'tags'
+        model: Toothless
       }
     ]
   }).then(dbKeywords => {
