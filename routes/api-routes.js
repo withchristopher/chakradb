@@ -98,7 +98,12 @@ router.post('/api/keywords', (req, res) => {
   Keywords
     .create({
       keywords_name: req.body.keywords_name,
-      toothless_id: req.body.toothless_id
+      toothless_id: req.body.toothless_id,
+      tagIds: req.body.tagIds,
+          include: {
+              model: 'keyword',
+              attributes: ['toothless_id'],
+          }
     })
     .then(dbKeywordsData => res.json(dbKeywordsData))
     .catch(err => {
