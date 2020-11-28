@@ -1,5 +1,5 @@
-const Keywords = require('./Keywords');
-const Toothless = require('./Toothless');
+const Keywords = require('./keywords');
+const Toothless = require('./toothless');
 
 // Products belongsTo Category
 Keywords.belongsTo(Toothless, {
