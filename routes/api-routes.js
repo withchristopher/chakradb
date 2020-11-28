@@ -95,7 +95,6 @@ router.post('/api/keywords', (req, res) => {
     .create({
       keywords_name: req.body.keywords_name,
       toothless_id: req.body.toothless_id,
-      tagIds: req.body.tagIds,
           include: {
               model: 'keyword',
               attributes: ['toothless_id'],
