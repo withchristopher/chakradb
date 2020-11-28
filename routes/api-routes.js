@@ -8,16 +8,23 @@ const { Toothless, Keywords } = require('../models/index');
 
 // GET route for getting all of the toothless
 router.get('/api/toothless', (req, res) => {
-  Toothless.findAll({}).then(dbToothless => {
+  Toothless.findAll({
+    include: {
+      model: Keywords
+    }
+  }).then(dbToothless => {
     res.json(dbToothless);
   });
 });
 
 // GET route for deleting a tooth
 router.get('/api/toothless/:id', (req, res) => {
-  Toothless.findAll({
+  Toothless.findOne({
     where: {
       id: req.params.id
+    },
+    include: {
+      model: Keywords
     }
   }).then(dbToothless => {
     res.json(dbToothless);
@@ -66,7 +73,17 @@ router.put('/api/toothless/:id', (req, res) => {
 //// Keywords
 
 router.get('/api/keywords', (req, res) => {
-  Keywords.findAll({}).then(dbKeywords => {
+  Keywords.findAll({
+    include: [
+      {
+        model: Category
+      },
+      {
+        model: Tag,
+        as: 'tags'
+      }
+    ]
+  }).then(dbKeywords => {
     res.json(dbKeywords)
     .catch(err => {
       console.log(err);
@@ -74,13 +91,14 @@ router.get('/api/keywords', (req, res) => {
     })
   });
 });
-
+ 
 
 router.post('/api/keywords', (req, res) => {
   // create a new keyword
   Keywords
     .create({
-      keywords_name: req.body.keywords_name
+      keywords_name: req.body.keywords_name,
+      toothless_id: req.body.toothless_id
     })
     .then(dbKeywordsData => res.json(dbKeywordsData))
     .catch(err => {

@@ -1,13 +1,13 @@
 const Keywords = require('./keywords');
 const Toothless = require('./toothless');
 
-// Products belongsTo Category
+// Keywords belongsTo a Document
 Keywords.belongsTo(Toothless, {
     foreignKey: 'toothless_id',
     onDelete: 'SET NULL'
   })
 
-// Categories have many Products
+// Documents have many Keywords
 Toothless.hasMany(Keywords, {
     foreignKey: 'toothless_id'
   })
